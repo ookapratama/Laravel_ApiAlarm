@@ -10,7 +10,7 @@
                         <a href="#">Dashboard</a>
                     </div>
                     <div class="breadcrumb-item">
-                        <a href="{{ route('index.dosen') }}">Dosen</a>
+                        <a href="{{ route('dosen.index') }}">Dosen</a>
                     </div>
                     <div class="breadcrumb-item">Edit</div>
                 </div>
@@ -23,20 +23,35 @@
                             <div class="card-header">
                                 <h4>Edit</h4>
                             </div>
-                            <form action="">
-
+                            <form action="{{ route('dosen.update') }}" method="POST">
+                                @csrf
+                                @method('PUT')
                                 <div class="row">
-
+                                    <input type="hidden" name="id" value="{{ $dosen->id_dosen }}">
                                     <div class="card-body col-md-4">
                                         <div class="form-group">
                                             <label>Nama Dosen</label>
-                                            <input type="text" name="nama" value="Ooka" class="form-control" />
+                                            <input type="text" name="nama_dosen" value="{{ $dosen->nama_dosen }}"
+                                                class="form-control @error('nama_dosen') is-invalid @enderror" />
+                                            @error('nama_dosen')
+                                                <div class="alert alert-danger mt-2">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="card-body col-md-4">
                                         <div class="form-group">
                                             <label>NIDN</label>
-                                            <input type="text" name="nidn" value="20101" class="form-control" />
+                                            <input type="text" name="nik_dosen" value="{{ $dosen->nik_dosen }}"
+                                                class="form-control @error('nik_dosen') is-invalid @enderror"
+                                                onkeypress="return (event.charCode != 8 && event.charCode == 0 || (event.charCode >= 48 && event.charCode <=57))"
+                                                maxlength="10" />
+                                            @error('nik_dosen')
+                                                <div class="alert alert-danger mt-2">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
 
@@ -44,15 +59,23 @@
                                         <div class="card-body ">
                                             <div class="form-group">
                                                 <label>No Hp</label>
-                                                <input type="text" name="no_hp" value="0812" class="form-control" />
+                                                <input type="text" name="nohp_dosen" value="{{ $dosen->nohp_dosen }}"
+                                                    class="form-control @error('nohp_dosen') is-invalid @enderror"
+                                                    onkeypress="return (event.charCode != 8 && event.charCode == 0 || (event.charCode >= 48 && event.charCode <=57))"
+                                                    maxlength="12" />
+                                                @error('nohp_dosen')
+                                                    <div class="alert alert-danger mt-2">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="d-flex mx-3 mb-3">
 
-                                    <button class="btn btn-success"> Edit</button>
-                                    <a href="{{ route('index.dosen') }}" class="mx-3 btn btn-secondary"> Batal</a>
+                                    <button type="submit" class="btn btn-success"> Edit</button>
+                                    <a href="{{ route('dosen.index') }}" class="mx-3 btn btn-secondary"> Batal</a>
                                 </div>
                             </form>
                         </div>

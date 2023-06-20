@@ -43,15 +43,15 @@
                                     <tbody>
                                         @forelse ($dosens as $dosen)
                                             <tr>
-                                                <th scope="row">{{ ++$i }}</th>
+                                                <th scope="row">{{ $i++ }}</th>
                                                 <td>{{ $dosen->nama_dosen }}</td>
                                                 <td>{{ $dosen->nik_dosen }}</td>
                                                 <td>{{ $dosen->nohp_dosen }}</td>
                                                 <td>{{ $dosen->id_admin }}</td>
                                                 <td>
-                                                    <form action="{{ route('dosen.destroy', $mhs->id_dosen) }}"
+                                                    <form action="{{ route('dosen.destroy', $dosen->id_dosen) }}"
                                                         method="POST">
-                                                        <a href="{{ route('dosen.edit', $mhs->id_dosen) }}"
+                                                        <a href="{{ route('dosen.edit', $dosen->id_dosen) }}"
                                                             class="btn btn-warning">Edit</a>
                                                         @csrf
                                                         @method('DELETE')

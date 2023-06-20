@@ -21,7 +21,7 @@
                         <div class="card">
                             <div class="card-header">
                                 {{-- <h4>Simple</h4> --}}
-                                <a href="{{ route('tambah.matakuliah') }}" class="btn btn-success">
+                                <a href="{{ route('matakuliah.create') }}" class="btn btn-success">
                                     <span class="ion-plus"></span>
                                     Tambah Mata Kuliah
                                 </a>
@@ -31,31 +31,43 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Nama</th>
-                                            <th scope="col">Kode</th>
+                                            <th scope="col">Nama matakuliah</th>
+                                            <th scope="col">Kode matakuliah</th>
                                             <th scope="col">Admin</th>
                                             <th scope="col">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if (null != null)
+                                        @forelse ($matkuls as $matkul)
                                             <tr>
-                                                <td colspan="7">Data tidak ada</td>
-                                            </tr>
-                                        @else
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Ooka PRatama</td>
-                                                <td>6TAPK-C</td>
-                                                <td>Admin</td>
+                                                <th scope="row">{{ $i++ }}</th>
+                                                <td>{{ $matkul->nama_matkul }}</td>
+                                                <td>{{ $matkul->kode_matkul }}</td>
+                                                <td>{{ $matkul->id_admin }}</td>
                                                 <td>
-                                                    <a href="{{ route('edit.matakuliah') }}" class="btn btn-warning">Edit</a> <a href=""
-                                                        class="btn btn-danger">Hapus</a>
+                                                    <form action="{{ route('matkul.destroy', $matkul->id_matkul) }}"
+                                                        method="POST">
+                                                        <a href="{{ route('matkul.edit', $matkul->id_matkul) }}"
+                                                            class="btn btn-warning">Edit</a>
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" id="swal-delete"
+                                                            class="btn btn-danger">Hapus</button>
+                                                    </form>
                                                 </td>
                                             </tr>
-                                        @endif
+                                        @empty
+                                            <tr>
+                                                <td colspan="6">Data tidak ada</td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
+                                @if ($matkuls->hasPages())
+                                    <div class="card-footer">
+                                        {{ $matkuls->links() }}
+                                    </div>
+                                @endif
                             </div>
                         </div>
 

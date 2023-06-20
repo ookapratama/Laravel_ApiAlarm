@@ -24,11 +24,11 @@ class DosenController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-
+        // dd($request->nohp_dosen);
         $errors = $request->validate([
-            'nik_dosen'         => $request->nik_dosen,
-            'nama_dosen'        => $request->nama_dosen,
-            'nohp_dosen'        => $request->nohp_dosen,
+            'nik_dosen'         => 'required',
+            'nama_dosen'        => 'required',
+            'nohp_dosen'        => 'required',
         ]);
         $data = $request->all();
         $data['id_admin'] = 1;

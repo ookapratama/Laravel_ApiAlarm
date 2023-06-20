@@ -23,20 +23,34 @@
                             <div class="card-header">
                                 <h4>Tambah</h4>
                             </div>
-                            <form action="">
-
+                            <form action="{{ route('dosen.store') }}" method="POST">
+                                @csrf
                                 <div class="row">
 
                                     <div class="card-body col-md-4">
                                         <div class="form-group">
                                             <label>Nama Dosen</label>
-                                            <input type="text" name="nama" class="form-control" />
+                                            <input type="text" name="nama_dosen"
+                                                class="form-control @error('nama_dosen') is-invalid @enderror" />
+                                            @error('nama_dosen')
+                                                <div class="alert alert-danger mt-2">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="card-body col-md-4">
                                         <div class="form-group">
                                             <label>NIDN</label>
-                                            <input type="text" name="nim" class="form-control" onkeypress="return (event.charCode != 8 && event.charCode == 0 || (event.charCode >= 48 && event.charCode <=57))" maxlength="10" />
+                                            <input type="text" name="nik_dosen"
+                                                class="form-control @error('nik_dosen') is-invalid @enderror"
+                                                onkeypress="return (event.charCode != 8 && event.charCode == 0 || (event.charCode >= 48 && event.charCode <=57))"
+                                                maxlength="10" />
+                                            @error('nik_dosen')
+                                                <div class="alert alert-danger mt-2">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
 
@@ -44,14 +58,21 @@
                                         <div class="card-body ">
                                             <div class="form-group">
                                                 <label>No Hp</label>
-                                                <input type="text" name="no_hp" class="form-control" onkeypress="return (event.charCode != 8 && event.charCode == 0 || (event.charCode >= 48 && event.charCode <=57))" maxlength="12" />
+                                                <input type="text" name="nohp_dosen" class="form-control @error('nohp_dosen') is-invalid @enderror"
+                                                    onkeypress="return (event.charCode != 8 && event.charCode == 0 || (event.charCode >= 48 && event.charCode <=57))"
+                                                    maxlength="12" />
+                                                @error('nohp_dosen')
+                                                    <div class="alert alert-danger mt-2">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="d-flex mx-3 mb-3">
 
-                                    <button class="btn btn-success"> Tambah</button>
+                                    <button type="submit" class="btn btn-success"> Tambah</button>
                                     <a href="{{ route('dosen.index') }}" class="mx-3 btn btn-secondary"> Batal</a>
                                 </div>
                             </form>

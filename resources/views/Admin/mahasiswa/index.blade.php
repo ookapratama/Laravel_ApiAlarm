@@ -43,9 +43,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($mahasiswas as $i => $mhs)
+                                        @forelse ($mahasiswas as $mhs)
                                             <tr>
-                                                <th scope="row">{{ ++$i }}</th>
+                                                <th scope="row">{{ $i++ }}</th>
                                                 <td>{{ $mhs->nama_mahasiswa }}</td>
                                                 <td>{{ $mhs->nim_mahasiswa }}</td>
                                                 <td>{{ $mhs->alamat_mahasiswa }}</td>

@@ -45,15 +45,18 @@ Route::group(['prefix' => '/admin', 'namespace' => 'App\Http\Controllers\Admin']
         Route::get('/create', 'DosenController@create')->name('dosen.create');
         Route::post('/store', 'DosenController@store')->name('dosen.store');
         Route::get('/edit/{id}', 'DosenController@edit')->name('dosen.edit');
-        Route::get('/update', 'DosenController@update')->name('dosen.update');
-        Route::get('/destroy/{id}', 'DosenController@destroy')->name('dosen.destroy');
+        Route::put('/update', 'DosenController@update')->name('dosen.update');
+        Route::delete('/destroy/{id}', 'DosenController@destroy')->name('dosen.destroy');
         
     });
 
-    Route::prefix('matakuliah')->group(function () {
-        Route::get('/', 'MatkulController@index')->name('index.matakuliah');
-        Route::get('/tambah', 'MatkulController@tambah')->name('tambah.matakuliah');
-        Route::get('/edit', 'MatkulController@edit')->name('edit.matakuliah');
+    Route::prefix('matkul')->group(function () {
+        Route::get('/', 'MatkulController@index')->name('matkul.index');
+        Route::get('/create', 'MatkulController@create')->name('matkul.create');
+        Route::post('/store', 'MatkulController@store')->name('matkul.store');
+        Route::get('/edit/{id}', 'MatkulController@edit')->name('matkul.edit');
+        Route::put('/update', 'MatkulController@update')->name('matkul.update');
+        Route::delete('/destroy/{id}', 'MatkulController@destroy')->name('matkul.destroy');
         
     });
     Route::prefix('admin')->group(function () {
