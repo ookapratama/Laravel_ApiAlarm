@@ -90,7 +90,11 @@
             iziToast.error('{{ session('error') }}', 'GAGAL!');
         @endif
 
-        
+        @if (session()->has('error-password'))
+            swal("Warning", 'Password lama tidak valid', "error");
+        @elseif (session()->has('error'))
+            swal("Good Job", "You clicked the button!", "warning");
+        @endif
     </script>
 
 </body>

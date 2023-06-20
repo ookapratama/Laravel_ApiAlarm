@@ -21,7 +21,9 @@
                         <div class="card">
                             <div class="card-header">
                                 {{-- <h4>Simple</h4> --}}
-                                <a href="{{ route('tambah.admin') }}" class="btn btn-success">
+                                <?php $i = $admins->firstItem(); ?>
+
+                                <a href="{{ route('admin.create') }}" class="btn btn-success">
                                     <span class="ion-plus"></span>
                                     Tambah Admin
                                 </a>
@@ -30,28 +32,35 @@
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
+                                            <th scope="col">No</th>
                                             <th scope="col">Username</th>
                                             <th scope="col">Password</th>
                                             <th scope="col">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if (null != null)
+                                        @forelse ($admins as $admin)
                                             <tr>
-                                                <td colspan="7">Data tidak ada</td>
-                                            </tr>
-                                        @else
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Ooka PRatama</td>
-                                                <td>123</td>
+                                                <th scope="row">{{ $i++ }}</th>
+                                                <td>{{ $admin->username_admin }}</td>
+                                                <td>{{ $admin->password_admin }}</td>
                                                 <td>
-                                                    <a href="{{ route('edit.admin') }}" class="btn btn-warning">Edit</a> <a href=""
-                                                        class="btn btn-danger">Hapus</a>
+                                                    <form action="{{ route('admin.destroy', $admin->id_admin) }}"
+                                                        method="POST">
+                                                        <a href="{{ route('admin.edit', $admin->id_admin) }}"
+                                                            class="btn btn-warning">Edit</a>
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" id="swal-delete"
+                                                            class="btn btn-danger">Hapus</button>
+                                                    </form>
                                                 </td>
                                             </tr>
-                                        @endif
+                                        @empty
+                                            <tr>
+                                                <td colspan="4">Data tidak ada</td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>

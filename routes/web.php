@@ -60,9 +60,12 @@ Route::group(['prefix' => '/admin', 'namespace' => 'App\Http\Controllers\Admin']
         
     });
     Route::prefix('admin')->group(function () {
-        Route::get('/', 'AdminController@form')->name('form.admin');
-        Route::get('/tambah', 'AdminController@tambah')->name('tambah.admin');
-        Route::get('/edit', 'AdminController@edit')->name('edit.admin');
+        Route::get('/', 'AdminController@index')->name('admin.index');
+        Route::get('/create', 'AdminController@create')->name('admin.create');
+        Route::post('/store', 'AdminController@store')->name('admin.store');
+        Route::get('/edit/{id}', 'AdminController@edit')->name('admin.edit');
+        Route::put('/update', 'AdminController@update')->name('admin.update');
+        Route::delete('/destroy/{id}', 'AdminController@destroy')->name('admin.destroy');
         
     });
 

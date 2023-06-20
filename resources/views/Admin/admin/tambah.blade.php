@@ -10,7 +10,7 @@
                         <a href="#">Dashboard</a>
                     </div>
                     <div class="breadcrumb-item">
-                        <a href="{{ route('form.admin') }}">Admin</a>
+                        <a href="{{ route('admin.index') }}">Admin</a>
                     </div>
                     <div class="breadcrumb-item">Tambah</div>
                 </div>
@@ -23,28 +23,38 @@
                             <div class="card-header">
                                 <h4>Tambah</h4>
                             </div>
-                            <form action="">
-
+                            <form action="{{ route('admin.store') }}" method="POST">
+                                @csrf
                                 <div class="row">
 
                                     <div class="card-body col-md-4">
                                         <div class="form-group">
                                             <label>Nama Admin</label>
-                                            <input type="text" name="nama" class="form-control" />
+                                            <input type="text" name="username_admin" @error('username_admin') is-invalid @enderror class="form-control" />
+                                            @error('username_admin')
+                                                <div class="alert alert-danger mt-2">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="card-body col-md-4">
                                         <div class="form-group">
                                             <label>Password</label>
-                                            <input type="text" name="kode" class="form-control" />
+                                            <input type="text" name="password_admin" @error('password_admin') is-invalid @enderror class="form-control" />
+                                            @error('password_admin')
+                                                <div class="alert alert-danger mt-2">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
 
                                 </div>
                                 <div class="d-flex mx-3 mb-3">
 
-                                    <button class="btn btn-success"> Tambah</button>
-                                    <a href="{{ route('form.admin') }}" class="mx-3 btn btn-secondary"> Batal</a>
+                                    <button type="submit" class="btn btn-success"> Tambah</button>
+                                    <a href="{{ route('admin.index') }}" class="mx-3 btn btn-secondary"> Batal</a>
                                 </div>
                             </form>
                         </div>
