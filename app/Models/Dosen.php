@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Dosen extends Model
 {
     use HasFactory;
+    protected $table = 'data_dosens';
+    protected $primaryKey = 'id_dosen';
     protected $fillable = [
         'id_admin',
         'nama_dosen',

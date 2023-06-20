@@ -33,12 +33,14 @@ Route::group(['prefix' => '/admin', 'namespace' => 'App\Http\Controllers\Admin']
 
     Route::get('/', 'AdminController@index')->name('admin.dashboard');
     
-    Route::prefix('mahasiswa')->group(function () {
-        Route::get('/', 'MahasiswaController@index')->name('index.mahasiswa');
-        Route::get('/tambah', 'MahasiswaController@tambah')->name('tambah.mahasiswa');
-        Route::get('/edit', 'MahasiswaController@edit')->name('edit.mahasiswa');
+    Route::resource('/mahasiswa', 'MahasiswaController');
+    
+    // Route::prefix('mahasiswa')->group(function () {
+    //     Route::get('/', 'MahasiswaController@index')->name('index.mahasiswa');
+    //     Route::get('/tambah', 'MahasiswaController@tambah')->name('tambah.mahasiswa');
+    //     Route::get('/edit', 'MahasiswaController@edit')->name('edit.mahasiswa');
         
-    });
+    // });
 
     Route::prefix('dosen')->group(function () {
         Route::get('/', 'DosenController@index')->name('index.dosen');

@@ -21,7 +21,9 @@
                         <div class="card">
                             <div class="card-header">
                                 {{-- <h4>Simple</h4> --}}
-                                <a href="{{ route('tambah.mahasiswa') }}" class="btn btn-success">
+                                <?php $i = $mahasiswas->firstItem(); ?>
+
+                                <a href="{{ route('mahasiswa.create') }}" class="btn btn-success">
                                     <span class="ion-plus"></span>
                                     Tambah Mahasiswa
                                 </a>
@@ -30,10 +32,9 @@
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
+                                            <th scope="col">No</th>
                                             <th scope="col">Nama</th>
                                             <th scope="col">Nim</th>
-                                            <th scope="col">Username</th>
                                             <th scope="col">Alamat</th>
                                             <th scope="col">Email</th>
                                             <th scope="col">No Hp</th>
@@ -42,28 +43,38 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if (null != null)
+                                        @forelse ($mahasiswas as $i => $mhs)
                                             <tr>
-                                                <td colspan="7">Data tidak ada</td>
-                                            </tr>
-                                        @else
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Ooka PRatama</td>
-                                                <td>202249</td>
-                                                <td>ooka pratama</td>
-                                                <td>ANtang</td>
-                                                <td>ooka@gmail.com</td>
-                                                <td>08192382</td>
-                                                <td>Admin</td>
+                                                <th scope="row">{{ ++$i }}</th>
+                                                <td>{{ $mhs->nama_mahasiswa }}</td>
+                                                <td>{{ $mhs->nim_mahasiswa }}</td>
+                                                <td>{{ $mhs->alamat_mahasiswa }}</td>
+                                                <td>{{ $mhs->email_mahasiswa }}</td>
+                                                <td>{{ $mhs->nohp_mahasiswa }}</td>
+                                                <td>{{ $mhs->id_admin }}</td>
                                                 <td>
-                                                    <a href="{{ route('edit.mahasiswa') }}" class="btn btn-warning">Edit</a> <a href=""
-                                                        class="btn btn-danger">Hapus</a>
+                                                    <form action="{{ route('mahasiswa.destroy', $mhs->id_mahasiswa) }}"
+                                                        method="POST">
+                                                        <a href="{{ route('mahasiswa.edit', $mhs->id_mahasiswa) }}"
+                                                            class="btn btn-warning">Edit</a>
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" id="swal-delete" class="btn btn-danger">Hapus</button>
+                                                    </form>
                                                 </td>
                                             </tr>
-                                        @endif
+                                        @empty
+                                            <tr>
+                                                <td class="" colspan="9">Data mahasiswa tidak ada</td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
+                                @if ($mahasiswas->hasPages())
+                                    <div class="card-footer">
+                                        {{ $mahasiswas->links() }}
+                                    </div>
+                                @endif
                             </div>
                         </div>
 

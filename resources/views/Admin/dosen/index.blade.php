@@ -21,7 +21,9 @@
                         <div class="card">
                             <div class="card-header">
                                 {{-- <h4>Simple</h4> --}}
-                                <a href="{{ route('tambah.dosen') }}" class="btn btn-success">
+                                <?php $i = $dosens->firstItem(); ?>
+
+                                <a href="{{ route('dosen.create') }}" class="btn btn-success">
                                     <span class="ion-plus"></span>
                                     Tambah Dosen
                                 </a>
@@ -30,32 +32,48 @@
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
+                                            <th scope="col">No</th>
                                             <th scope="col">Nama</th>
                                             <th scope="col">NIDN</th>
+                                            <th scope="col">No Telepon</th>
                                             <th scope="col">Admin</th>
                                             <th scope="col">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if (null != null)
+                                        @forelse ($dosens as $dosen)
                                             <tr>
-                                                <td colspan="7">Data tidak ada</td>
-                                            </tr>
-                                        @else
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Ooka PRatama</td>
-                                                <td>202249</td>
-                                                <td>Admin</td>
+                                                <th scope="row">{{ ++$i }}</th>
+                                                <td>{{ $dosen->nama_dosen }}</td>
+                                                <td>{{ $dosen->nik_dosen }}</td>
+                                                <td>{{ $dosen->nohp_dosen }}</td>
+                                                <td>{{ $dosen->id_admin }}</td>
                                                 <td>
-                                                    <a href="{{ route('edit.dosen') }}" class="btn btn-warning">Edit</a> <a href=""
-                                                        class="btn btn-danger">Hapus</a>
+                                                    <form action="{{ route('dosen.destroy', $mhs->id_dosen) }}"
+                                                        method="POST">
+                                                        <a href="{{ route('dosen.edit', $mhs->id_dosen) }}"
+                                                            class="btn btn-warning">Edit</a>
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" id="swal-delete"
+                                                            class="btn btn-danger">Hapus</button>
+                                                    </form>
                                                 </td>
                                             </tr>
-                                        @endif
+                                        @empty
+                                            <tr>
+                                                <td colspan="6">Data tidak ada</td>
+                                            </tr>
+                                        @endforelse
+
+
                                     </tbody>
                                 </table>
+                                @if ($dosens->hasPages())
+                                    <div class="card-footer">
+                                        {{ $dosens->links() }}
+                                    </div>
+                                @endif
                             </div>
                         </div>
 
