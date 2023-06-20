@@ -12,14 +12,14 @@ class MatkulController extends Controller
 {
     public function index(): View
     {
-        $dosens = Matkul::latest()->paginate(5);
+        $matkuls = Matkul::latest()->paginate(5);
 
-        return view('Admin.matkul.index', compact('dosens'));
+        return view('Admin.matakuliah.index', compact('matkuls'));
     }
 
     public function create(): View
     {
-        return view('Admin.matkul.tambah');
+        return view('Admin.matakuliah.tambah');
     }
 
     public function store(Request $request): RedirectResponse
@@ -40,19 +40,18 @@ class MatkulController extends Controller
     public function edit($id)
     {
         // dd("tes");
-        $matkul = Matkul::where('id_dosen', $id)->first();
+        $matkul = Matkul::where('id_matkul', $id)->first();
         // dd($matkul);
-        return view('Admin.matkul.edit', compact('matkul'));
+        return view('Admin.matakuliah.edit', compact('matkul'));
     }
 
     public function update(Request $request): RedirectResponse
     {
-        $matkul = Matkul::where('id_dosen', $request->id)->first();
+        $matkul = Matkul::where('id_matkul', $request->id)->first();
         // dd($matkul);
         $data = [
-            'nik_dosen'         => $request->nik_dosen,
-            'RedirectResponse'        => $request->nama_dosen,
-            'nohp_dosen'        => $request->nohp_dosen,
+            'nama_matkul'        => $request->nama_matkul,
+            'kode_matkul'        => $request->kode_matkul,
         ];
         // dd($data);
         $matkul->update($data);

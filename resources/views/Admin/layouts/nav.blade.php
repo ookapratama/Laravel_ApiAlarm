@@ -43,7 +43,7 @@
             </li>
             <li class="{{ $title == 'Jadwal' ? 'active' : '' }}"><a class="nav-link " href="{{ route('index.jadwal') }}"><i class="ion-android-calendar"></i> <span>Jadwal</span></a>
             </li>
-            <li class="{{ $title == 'Mata Kuliah' ? 'active' : '' }}"><a class="nav-link " href="{{ route('index.matakuliah') }}"><i class="ion-android-create
+            <li class="{{ $title == 'Mata Kuliah' ? 'active' : '' }}"><a class="nav-link " href="{{ route('matkul.index') }}"><i class="ion-android-create
                "></i> <span>Mata Kuliah</span></a>
             </li>
             <li class="{{ $title == 'Dosen' ? 'active' : '' }}"><a class="nav-link " href="{{ route('index.dosen') }}"><i class="ion-ios-people"></i> <span>Dosen</span></a>

@@ -30,7 +30,7 @@
                                     <div class="card-body col-md-4">
                                         <div class="form-group">
                                             <label>Nama Mata Kuliah</label>
-                                            <input type="text" name="nama_matkul"
+                                            <input type="text" name="nama_matkul" 
                                                 class="form-control @error('nama_matkul') is-invalid @enderror" />
                                             @error('nama_matkul')
                                                 <div class="alert alert-danger mt-2">
@@ -42,7 +42,7 @@
                                     <div class="card-body col-md-4">
                                         <div class="form-group">
                                             <label>Kode</label>
-                                            <input type="text" name="kode_matkul"
+                                            <input type="text" name="kode_matkul" maxlength="7"
                                                 class="form-control @error('kode_matkul') is-invalid @enderror" />
                                             @error('kode_matkul')
                                                 <div class="alert alert-danger mt-2">

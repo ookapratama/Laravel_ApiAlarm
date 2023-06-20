@@ -21,7 +21,9 @@
                         <div class="card">
                             <div class="card-header">
                                 {{-- <h4>Simple</h4> --}}
-                                <a href="{{ route('matakuliah.create') }}" class="btn btn-success">
+                                <?php $i = $matkuls->firstItem(); ?>
+
+                                <a href="{{ route('matkul.create') }}" class="btn btn-success">
                                     <span class="ion-plus"></span>
                                     Tambah Mata Kuliah
                                 </a>
@@ -30,7 +32,7 @@
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
+                                            <th scope="col">No</th>
                                             <th scope="col">Nama matakuliah</th>
                                             <th scope="col">Kode matakuliah</th>
                                             <th scope="col">Admin</th>

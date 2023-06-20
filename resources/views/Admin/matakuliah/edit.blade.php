@@ -10,7 +10,7 @@
                         <a href="#">Dashboard</a>
                     </div>
                     <div class="breadcrumb-item">
-                        <a href="{{ route('index.matakuliah') }}">Mata Kuliah</a>
+                        <a href="{{ route('matkul.index') }}">Mata Kuliah</a>
                     </div>
                     <div class="breadcrumb-item">Edit</div>
                 </div>
@@ -23,28 +23,41 @@
                             <div class="card-header">
                                 <h4>Edit</h4>
                             </div>
-                            <form action="">
-
+                            <form action="{{ route('matkul.update') }}" method="POST">
+                                @csrf
+                                @method('PUT')
                                 <div class="row">
-
+                                    <input type="hidden" name="id" value="{{ $matkul->id_matkul }}">
                                     <div class="card-body col-md-4">
                                         <div class="form-group">
                                             <label>Nama Mata Kuliah</label>
-                                            <input type="text" name="nama" value="Aplikasi Konsentrasi" class="form-control" />
+                                            <input type="text" name="nama_matkul" value="{{ $matkul->nama_matkul }}"
+                                                class="form-control @error('nama_matkul') is-invalid @enderror" />
+                                            @error('nama_matkul')
+                                                <div class="alert alert-danger mt-2">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="card-body col-md-4">
                                         <div class="form-group">
                                             <label>Kode</label>
-                                            <input type="text" name="kode" value="6TAPK-C" class="form-control" />
+                                            <input type="text" name="kode_matkul" maxlength="7" value="{{ $matkul->kode_matkul }}"
+                                                class="form-control @error('kode_matkul') is-invalid @enderror" />
+                                            @error('kode_matkul')
+                                                <div class="alert alert-danger mt-2">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
 
                                 </div>
                                 <div class="d-flex mx-3 mb-3">
 
-                                    <button class="btn btn-success"> Edit</button>
-                                    <a href="{{ route('index.matakuliah') }}" class="mx-3 btn btn-secondary"> Batal</a>
+                                    <button type="submit" class="btn btn-success"> Update</button>
+                                    <a href="{{ route('matkul.index') }}" class="mx-3 btn btn-secondary"> Batal</a>
                                 </div>
                             </form>
                         </div>
