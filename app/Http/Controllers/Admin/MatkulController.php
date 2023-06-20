@@ -39,9 +39,7 @@ class MatkulController extends Controller
 
     public function edit($id)
     {
-        // dd("tes");
         $matkul = Matkul::where('id_matkul', $id)->first();
-        // dd($matkul);
         return view('Admin.matakuliah.edit', compact('matkul'));
     }
 
